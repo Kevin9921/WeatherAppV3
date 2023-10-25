@@ -1,26 +1,40 @@
 import React from "react";
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import RowTexts from '../components/RowTexts'
 import { weatherType } from "../Utilities/weatherType";
+import ListItem from "../components/ListItem";
+import { ScrollView } from "react-native";
+
 
 
 
 const CurrentWeather = ({weatherData}) => {
   const {wrapper, container, tempStyles, feels, highLowWrapper, highLow, bodyWrapper, description, message,icon, cityStyle} = styles
   
-  const {main:{ temp, feels_like, temp_max,temp_min }, weather} = weatherData.list[0]
+  const {main:{ temp, feels_like, temp_max, temp_min }, weather} = weatherData.list[0]
   const {name, country, population, sunrise, sunset} = weatherData.city
 
   const weatherCondition = weather[0]?.main
+  const render = ({item}) => (
+    <ListItem 
+    condition = {item.weather[0].main} 
+    dt_txt={item.dt_txt} 
+    min = {item.main.temp_min} 
+    max = {item.main.temp_max} 
+    />
+    
+)   
+ 
 
   return (
     <SafeAreaView style ={[
       wrapper, {backgroundColor: weatherType[weatherCondition]?.backgroundColor}
     ]}>
       
+      <ScrollView>
       <View style ={container}>
-      <Text style= {cityStyle}>{`${name}°`}</Text>
+      <Text style= {cityStyle}>{`${name}`}</Text>
         <Feather 
        
         name={weatherType[weatherCondition]?.icon} 
@@ -28,34 +42,67 @@ const CurrentWeather = ({weatherData}) => {
         color="white" />
 
           
-          <Text style = {tempStyles}>{`${temp}°`}</Text>
-          <Text style = {feels}>{`Feels like ${feels_like}°`}</Text>
+          <Text style = {tempStyles}>{`${Math.round(temp)}°`}</Text>
+          <Text style = {feels}>{`Feels like ${Math.round(feels_like)}°`}</Text>
           <RowTexts 
-          messageOne= {`High: ${temp_max}°`} 
-          messageTwo = {` Low: ${temp_min}°`}  
+          messageOne= {`High: ${Math.round(temp_max)}°`} 
+          messageTwo = {` Low: ${Math.round(temp_min)}°`}  
           containerStyles={highLowWrapper} 
           messageOneStyles={highLow} 
           messageTwoStyles={highLow}/>
       </View>
+      
       <RowTexts 
         messageOne ={weather[0]?.description} 
         messageTwo ={weatherType[weatherCondition]?.message} 
         containerStyles={bodyWrapper} 
         messageOneStyles ={description} 
         messageTwoStyles={message}/>
-  
-     
+      
+      <FlatList
+      style ={{flex:1}}
+        horizontal
+        data = {weatherData.list} 
+        renderItem={render}
+        keyExtractor={(item) => item.dt_txt}
+      
+        />
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
+      <Text> hello</Text>
 
+      </ScrollView>
     </SafeAreaView>
   )
+  
 } 
+
 const styles = StyleSheet.create({
   wrapper:{
     flex:1,
     backgroundColor: 'pink',
+    flexDirection: 'column',
   },
   container:{
-    flex: 1,
+    
+    flex: 3,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -81,8 +128,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
     paddingLeft: 25,
-    marginBottom: 40,
-    paddingTop: 50
+    marginTop: 20,
+    marginBottom: 20
+  
   },
   description:{
     fontSize: 48
@@ -92,7 +140,9 @@ const styles = StyleSheet.create({
   },
   cityStyle:{
     fontSize:50,
-    marginBottom: 60
+    marginTop: 40,
+    marginBottom: 40
+   
   }
 })
 export default CurrentWeather

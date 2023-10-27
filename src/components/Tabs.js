@@ -26,6 +26,7 @@ const Tabs = ({weather}) => {
         headerStyle:{
             backgroundColor:'lightblue'
         },
+        headerShown:false,
         headerTitleStyle:{
             fontWeight: 'bold',
             fontSize: 25,
@@ -70,7 +71,7 @@ const Tabs = ({weather}) => {
           {() => <UpcomingWeather weatherData={weather.list} />}
         </Tab.Screen> 
         */}
-        <Tab.Screen 
+        {/* <Tab.Screen 
         name={'City'} 
         options = {{
           tabBarIcon: ({focused}) => (
@@ -80,7 +81,7 @@ const Tabs = ({weather}) => {
         }}>
         {() => <City weatherData ={weather.city}/>}
       
-        </Tab.Screen> 
+        </Tab.Screen>  */}
       </Tab.Navigator>
       
     )

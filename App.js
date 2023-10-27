@@ -8,6 +8,7 @@ import * as Location from 'expo-location'
 
 import { useGetWeather } from './src/hooks/useGetWeather.js'
 import ErrorItem from './src/components/ErrorItem.js'
+import CurrentWeather from './src/screens/CurrentWeather.js'
 
 
 
@@ -19,11 +20,11 @@ const App = () => {
   if (weather && weather.list && !loading){
     //console.log(weather.city)
     return (
-      <NavigationContainer>
+      // <NavigationContainer>
         
-        <Tabs weather ={weather}/>
-      </NavigationContainer>
-      
+      //   <Tabs weather ={weather}/>
+      // </NavigationContainer>
+      <CurrentWeather weatherData={weather} />
     )
   }
 

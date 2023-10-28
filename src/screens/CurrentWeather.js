@@ -130,12 +130,13 @@ const styles = StyleSheet.create({
   },
   highLowWrapper: {
     flexDirection: "row",
+    marginBottom: 15,
   },
   bodyWrapper: {
     justifyContent: "flex-end",
     alignItems: "flex-start",
     paddingLeft: 25,
-    marginTop: 75,
+    marginTop: 60,
   },
   description: {
     fontSize: 48,
@@ -155,8 +156,8 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 2,
     borderRadius: 20,
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 20,
+    marginRight: 20,
     marginBottom: 20,
   },
   hourlyTitle: {
